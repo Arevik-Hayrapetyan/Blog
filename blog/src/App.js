@@ -1,23 +1,34 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import "tailwindcss/tailwind.css";
+import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom";
+import { Routes } from "./constants/routes";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="">
+      <Router >
+        <nav>
+          <ul>
+            {Object.values(Routes).map((fn) => {
+              const { url, text } = fn();
+
+              return (
+                <li>
+                  <Link to={url}>{text} </Link>
+                </li>
+              );
+            })}
+          </ul>
+
+          <Switch>
+            {Object.values(Routes).map((fn) => {
+              const { url, component } = fn();
+
+              return <Route exact path={url} component={component} />;
+            })}
+          </Switch>
+        </nav>
+      </Router>
     </div>
   );
 }
