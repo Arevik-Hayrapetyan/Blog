@@ -19,7 +19,7 @@ function App() {
               return (
                 <li >
                   
-                  <Link to={url} style={{ textDecoration: 'none' }}>{text} </Link>
+                  <Link to={url} style={{ textDecoration: 'none', flex: 3 }}>{text} </Link>
                 </li>
               );
             })}
