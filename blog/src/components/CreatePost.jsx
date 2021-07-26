@@ -7,34 +7,73 @@ import Box from "@material-ui/core/Box";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
-import Container from "@material-ui/core/Container";
+import AddCircleIcon from '@material-ui/icons/AddCircle';
 
-const useStyles = makeStyles({
 
-});
+const useStyles = makeStyles((theme) => ({
+  wrapper:{
+    height:"350px",
+    marginLeft:"25%",
+     marginTop: theme.spacing(8),
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    width: "50%",
+    backgroundColor: "#9da3b51a"
+  },
+  title: {
+    width:"300%",
+    margin: theme.spacing(3, 0, 2),
+  },
+  titleWidth:{
+    width: "25%"
+  },
+  content:{
+    width:"300%",
+    margin: theme.spacing(3, 0, 2),
+   
+  
+  
+  },
+
+contentWidth:{
+  width:"25%",
+  height:"50%"
+  
+
+  
+},
+addButtonsize:{
+  width:"10%",
+  height:"20%"
+}
+
+}))
+
 
 export default function CreatePost() {
   const classes = useStyles();
   return (
-    <form style={{ display: "block" }}>
+    <form  className={classes.wrapper}>
       <h1>Tell us your story...</h1>
-      <div>
+      <div className={classes.title}>
         <TextField
+        className={classes.titleWidth}
           id="outlined"
           label="Title*"
-          variant="outlined"
           placeholder="title..."
           autoFocus
         />
       </div>
-      <div>
+      <div className={classes.content} >
         <TextField
+        className={classes.contentWidth}
           id="outlined"
           label="Content*"
-          variant="outlined"
           placeholder="Write your post..."
         />
       </div>
+      <Button ><AddCircleIcon className={classes.addButtonsize}/></Button>
     </form>
   );
 }
