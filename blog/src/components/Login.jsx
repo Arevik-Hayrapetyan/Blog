@@ -88,7 +88,7 @@ class Login extends React.Component {
           {
             name: this.state.name,
             password: this.state.password,
-            id: Math.random()
+            id: Math.random(),
           },
         ],
       };
@@ -118,7 +118,7 @@ class Login extends React.Component {
             name="name"
             autoFocus
           />
-          <span>{this.state.nameError}</span>
+          <span style={{ color: "red" }}>{this.state.nameError}</span>
           <TextField
             onChange={this.handlePassword}
             variant="outlined"
@@ -129,7 +129,7 @@ class Login extends React.Component {
             type="password"
             id="password"
           />
-          <span color="red">{this.state.passwordError}</span>
+          <span style={{ color: "red" }}>{this.state.passwordError}</span>
 
           <Button
             onClick={this.handleLogin}
@@ -141,7 +141,7 @@ class Login extends React.Component {
           >
             Log In
           </Button>
-          <span>{this.state.errorMessage}</span>
+          <span style={{ color: "blue" }}>{this.state.errorMessage}</span>
         </div>
         <Box mt={8}></Box>
       </Container>

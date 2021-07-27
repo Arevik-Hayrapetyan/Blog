@@ -4,6 +4,7 @@ import TextField from "@material-ui/core/TextField";
 import { withStyles } from "@material-ui/core/styles";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
 import { setItems, getItems } from "..//helpers/localStorage";
+import postDate from "../helpers/data"
 
 const useStyles = (theme) => ({
   wrapper: {
@@ -31,6 +32,7 @@ const useStyles = (theme) => ({
   contentWidth: {
     width: "25%",
   },
+
   addButtonsize: {
     width: "10%",
     height: "20%",
@@ -45,6 +47,7 @@ class CreatePost extends React.Component {
       content: "",
       namePasswords: getItems("namePasswords"),
       titleContents: getItems() === null ? [] : getItems(),
+      
     };
   }
 
@@ -58,6 +61,7 @@ class CreatePost extends React.Component {
   };
 
   handleAdd = (event) => {
+    // setItems("postDate", this.state.postDate)
     setItems("titleContents", this.state.titleContents);
     this.setState((prevState) => {
       return {
@@ -66,10 +70,9 @@ class CreatePost extends React.Component {
           {
             title: this.state.title,
             content: this.state.content,
-            id: this.state.namePasswords[this.state.namePasswords.length - 1]
-              .id,
-              name: this.state.namePasswords[this.state.namePasswords.length - 1]
-              .name,
+            id: this.state.namePasswords[this.state.namePasswords.length - 1].id,
+              name: this.state.namePasswords[this.state.namePasswords.length - 1].name,
+              postDate: postDate()
           },
         ],
       };

@@ -32,6 +32,7 @@ class Blog extends React.Component {
     super(props);
     this.state = {
       titleContents: getItems("titleContents"),
+     
     };
   }
   render() {
@@ -46,7 +47,7 @@ class Blog extends React.Component {
             <div className="" key={item.id}>
               <Typography className={classes.pos} color="black" >
              < AccountCircleIcon fontSize="large" />
-               Created by  {item.name.toUpperCase()}
+              {item.postDate} by  {item.name.toUpperCase()}
               </Typography>
               <Typography className={classes.pos} color="textSecondary">
                 Title 
@@ -59,7 +60,7 @@ class Blog extends React.Component {
                 {item.content}
               </Typography>
               <CardActions>
-          <Button size="small" color="blue" color="secondary">Learn More</Button>
+          <Button size="small"  color="secondary">Learn More</Button>
         </CardActions>
             </div>
           ))}
