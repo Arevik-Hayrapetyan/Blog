@@ -1,10 +1,11 @@
 import React from "react";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
-import { makeStyles } from "@material-ui/core/styles";
+import { withStyles } from "@material-ui/core/styles";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
+import { setItems, getItems } from "..//helpers/localStorage";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = (theme) => ({
   wrapper: {
     height: "350px",
     marginLeft: "25%",
@@ -34,35 +35,82 @@ const useStyles = makeStyles((theme) => ({
     width: "10%",
     height: "20%",
   },
-}));
+});
 
-export default function CreatePost() {
-  const classes = useStyles();
-  return (
-    <form className={classes.wrapper}>
-      <h1>Tell us your story...</h1>
-      <div className={classes.title}>
-        <TextField
-          className={classes.titleWidth}
-          id="outlined"
-          label="Title*"
-          placeholder="title..."
-          autoFocus
-        />
-      </div>
-      <div className={classes.content}>
-        <TextField
-          multiline
-          rows={4}
-          className={classes.contentWidth}
-          id="outlined"
-          label="Content*"
-          placeholder="Write your post..."
-        />
-      </div>
-      <Button>
-        <AddCircleIcon className={classes.addButtonsize} />
-      </Button>
-    </form>
-  );
+class CreatePost extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      title: "",
+      content: "",
+      namePasswords: getItems("namePasswords"),
+      titleContents: getItems() === null ? [] : getItems(),
+    };
+  }
+
+  handleTitle = (event) => {
+    setItems("title", event.target.value);
+    this.setState({ title: event.target.value });
+  };
+  handleContent = (event) => {
+    setItems("content", event.target.value);
+    this.setState({ content: event.target.value });
+  };
+
+  handleAdd = (event) => {
+    setItems("titleContents", this.state.titleContents);
+    this.setState((prevState) => {
+      return {
+        titleContents: [
+          ...prevState.titleContents,
+          {
+            title: this.state.title,
+            content: this.state.content,
+            id: this.state.namePasswords[this.state.namePasswords.length - 1]
+              .id,
+              name: this.state.namePasswords[this.state.namePasswords.length - 1]
+              .name,
+          },
+        ],
+      };
+    });
+  };
+
+  render() {
+    const { classes } = this.props;
+    return (
+      <form className={classes.wrapper}>
+        <h1>Tell us your story...</h1>
+        <div className={classes.title}>
+          <TextField
+            onChange={this.handleTitle}
+            className={classes.titleWidth}
+            id="outlined"
+            label="Title*"
+            placeholder="title..."
+            autoFocus
+          />
+        </div>
+        <div className={classes.content}>
+          <TextField
+            onChange={this.handleContent}
+            multiline
+            rows={4}
+            className={classes.contentWidth}
+            id="outlined"
+            label="Content*"
+            placeholder="Write your post..."
+          />
+        </div>
+        <Button>
+          <AddCircleIcon
+            className={classes.addButtonsize}
+            onClick={this.handleAdd}
+          />
+        </Button>
+      </form>
+    );
+  }
 }
+
+export default withStyles(useStyles)(CreatePost);

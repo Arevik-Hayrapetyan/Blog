@@ -35,19 +35,16 @@ class Login extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: typeof getItems("name") !== "undefined" ? getItems("name") : "",
-      password:
-        typeof getItems("password") !== "undefined" ? getItems("password") : "",
+      name: "",
+      password: "",
       isValidName: false,
       isValidPassword: false,
-
       nameError: "",
       passwordError: "",
       errorMessage: "",
+      namePasswords: getItems() === null ? [] : getItems(),
     };
   }
-
- 
 
   handleName = (event) => {
     setItems("name", event.target.value);
@@ -63,7 +60,7 @@ class Login extends React.Component {
   };
 
   handlePassword = (event) => {
-    setItems("password", event.target.value)
+    setItems("password", event.target.value);
     this.setState({ password: event.target.value });
     const isValid = isValidPassword(this.state.password);
     if (isValid) {
@@ -76,11 +73,26 @@ class Login extends React.Component {
   };
 
   handleLogin = () => {
+    setItems("namePasswords", this.state.namePasswords);
+
     if (isValidName && isValidPassword) {
       this.setState({ errorMessage: "Congrats you are Login successfully" });
     } else {
       this.setState({ errorMessage: "Please try again" });
     }
+
+    this.setState((prevState) => {
+      return {
+        namePasswords: [
+          ...prevState.namePasswords,
+          {
+            name: this.state.name,
+            password: this.state.password,
+            id: Math.random()
+          },
+        ],
+      };
+    });
   };
 
   render() {
@@ -95,42 +107,41 @@ class Login extends React.Component {
           <Typography component="h1" variant="h5">
             Log in
           </Typography>
-          <form className={classes.form}>
-            <TextField
-              onChange={this.handleName}
-              variant="outlined"
-              margin="normal"
-              fullWidth
-              id="name"
-              label="Name"
-              name="name"
-              autoFocus
-            />
-            <span>{this.state.nameError}</span>
-            <TextField
-              onChange={this.handlePassword}
-              variant="outlined"
-              margin="normal"
-              fullWidth
-              name="password"
-              label="Password"
-              type="password"
-              id="password"
-            />
-            <span color="red">{this.state.passwordError}</span>
 
-            <Button
-              onClick={this.handleLogin}
-              type="submit"
-              fullWidth
-              variant="contained"
-              color="primary"
-              className={classes.submit}
-            >
-              Log In
-            </Button>
-            <span>{this.state.errorMessage}</span>
-          </form>
+          <TextField
+            onChange={this.handleName}
+            variant="outlined"
+            margin="normal"
+            fullWidth
+            id="name"
+            label="Name"
+            name="name"
+            autoFocus
+          />
+          <span>{this.state.nameError}</span>
+          <TextField
+            onChange={this.handlePassword}
+            variant="outlined"
+            margin="normal"
+            fullWidth
+            name="password"
+            label="Password"
+            type="password"
+            id="password"
+          />
+          <span color="red">{this.state.passwordError}</span>
+
+          <Button
+            onClick={this.handleLogin}
+            type="submit"
+            fullWidth
+            variant="contained"
+            color="primary"
+            className={classes.submit}
+          >
+            Log In
+          </Button>
+          <span>{this.state.errorMessage}</span>
         </div>
         <Box mt={8}></Box>
       </Container>
