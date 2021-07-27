@@ -1,6 +1,6 @@
-export function isValidName(email){
+export function isValidName(name){
     const nameChecker = /^[a-zA-Z ]{2,30}$/
-    const isValidName =nameChecker.test(email)
+    const isValidName = nameChecker.test(name)
     if(isValidName) return true;
     return false
 }

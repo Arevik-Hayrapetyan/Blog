@@ -8,6 +8,8 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { withStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
+import { setItems, getItems } from "..//helpers/localStorage";
+import { isValidName, isValidPassword } from "../helpers/validation";
 
 const useStyles = (theme) => ({
   paper: {
@@ -33,9 +35,53 @@ class Login extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: "",
+      name: typeof getItems("name") !== "undefined" ? getItems("name") : "",
+      password:
+        typeof getItems("password") !== "undefined" ? getItems("password") : "",
+      isValidName: false,
+      isValidPassword: false,
+
+      nameError: "",
+      passwordError: "",
+      errorMessage: "",
     };
   }
+
+ 
+
+  handleName = (event) => {
+    setItems("name", event.target.value);
+    this.setState({ name: event.target.value });
+    const isValid = isValidName(this.state.name);
+    if (isValid) {
+      this.setState({ isValidName: true });
+      this.setState({ nameError: "" });
+    } else {
+      this.setState({ isValidName: false });
+      this.setState({ nameError: "Wrong name" });
+    }
+  };
+
+  handlePassword = (event) => {
+    setItems("password", event.target.value)
+    this.setState({ password: event.target.value });
+    const isValid = isValidPassword(this.state.password);
+    if (isValid) {
+      this.setState({ isValidPassword: true });
+      this.setState({ passwordError: "" });
+    } else {
+      this.setState({ isValidPassword: false });
+      this.setState({ passwordError: "Wrong password" });
+    }
+  };
+
+  handleLogin = () => {
+    if (isValidName && isValidPassword) {
+      this.setState({ errorMessage: "Congrats you are Login successfully" });
+    } else {
+      this.setState({ errorMessage: "Please try again" });
+    }
+  };
 
   render() {
     const { classes } = this.props;
@@ -51,29 +97,30 @@ class Login extends React.Component {
           </Typography>
           <form className={classes.form}>
             <TextField
+              onChange={this.handleName}
               variant="outlined"
               margin="normal"
-              required
               fullWidth
               id="name"
               label="Name"
               name="name"
-              autoComplete="name"
               autoFocus
             />
+            <span>{this.state.nameError}</span>
             <TextField
+              onChange={this.handlePassword}
               variant="outlined"
               margin="normal"
-              required
               fullWidth
               name="password"
               label="Password"
               type="password"
               id="password"
-              autoComplete="current-password"
             />
+            <span color="red">{this.state.passwordError}</span>
 
             <Button
+              onClick={this.handleLogin}
               type="submit"
               fullWidth
               variant="contained"
@@ -82,6 +129,7 @@ class Login extends React.Component {
             >
               Log In
             </Button>
+            <span>{this.state.errorMessage}</span>
           </form>
         </div>
         <Box mt={8}></Box>
