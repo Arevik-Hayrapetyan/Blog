@@ -1,12 +1,19 @@
 import React from "react";
+import CreatePost from "./CreatePost";
 
 
-export default function Blog() {
-  
-  return (
-    <div className="bg-color-gray">
-      <h1  >Blog</h1>
-    </div>
-  );
+class Blog extends React.Component{
+  constructor(props){
+    super(props);
+    this.state = {
+      value:""
+    }
+  }
+  render(){
+    return (<>
+    <div></div>
+    </>)
+  }
 }
+export default Blog
 
