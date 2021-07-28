@@ -13,12 +13,14 @@ const months = [
   "Dec",
 ];
 function postDate() {
-  const now = new Date();
-  const day = now.getDate();
-  const month = now.getMonth();
-  const year = now.getFullYear();
-  const postDate = `${months[month]} ${day}, ${year} `;
-  return postDate;
+  let currentDate = new Date();
+  let date =
+    currentDate.getFullYear() +
+    "-" +
+    (currentDate.getMonth()[months] + 1) +
+    "-" +
+    currentDate.getDate();
+  return date;
 }
 
 export default postDate;

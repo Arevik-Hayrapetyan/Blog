@@ -4,7 +4,9 @@ import TextField from "@material-ui/core/TextField";
 import { withStyles } from "@material-ui/core/styles";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
 import { setItems, getItems } from "..//helpers/localStorage";
-import postDate from "../helpers/data"
+import postDate from "../helpers/data";
+import { Redirect } from 'react-router-dom';
+import { Routes } from "../constants/routes";
 
 const useStyles = (theme) => ({
   wrapper: {
@@ -45,9 +47,9 @@ class CreatePost extends React.Component {
     this.state = {
       title: "",
       content: "",
+      isAdd: false,
       namePasswords: getItems("namePasswords"),
       titleContents: getItems() === null ? [] : getItems(),
-      
     };
   }
 
@@ -61,7 +63,6 @@ class CreatePost extends React.Component {
   };
 
   handleAdd = (event) => {
-    // setItems("postDate", this.state.postDate)
     setItems("titleContents", this.state.titleContents);
     this.setState((prevState) => {
       return {
@@ -70,16 +71,20 @@ class CreatePost extends React.Component {
           {
             title: this.state.title,
             content: this.state.content,
-            id: this.state.namePasswords[this.state.namePasswords.length - 1].id,
-              name: this.state.namePasswords[this.state.namePasswords.length - 1].name,
-              postDate: postDate()
+            id: this.state.namePasswords.id,
+            name: this.state.namePasswords.name,
+            postDate: postDate(),
           },
         ],
       };
     });
+    this.setState({isAdd:true})
   };
 
   render() {
+    if (this.state.isAdd) {
+      return <Redirect to={Routes.blog().path} />;
+    }
     const { classes } = this.props;
     return (
       <form className={classes.wrapper}>

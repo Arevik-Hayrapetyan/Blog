@@ -6,7 +6,7 @@ import { postButton } from "./bottomButton";
 import { loginButton } from "./bottomButton";
 
 export const Routes = {
-  Blog: () => ({ url: "/", text: homeButton, component: Blog }),
-  CreatePost: () => ({ url: "/post", text: postButton, component: CreatePost }),
-  Login: () => ({ url: "/login", text: loginButton, component: Login }),
+  blog: () => ({ path: "/", text: homeButton, component: Blog }),
+  create_post: () => ({ path: "/post", text: postButton, component: CreatePost }),
+  login: () => ({ path: "/login", text: loginButton, component: Login }),
 };

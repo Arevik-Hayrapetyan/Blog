@@ -8,11 +8,11 @@ export default function Navbar() {
       <nav>
         <ul style={{ display: "flex", listStyle: "none" }} key="1">
           {Object.values(Routes).map((fn) => {
-            const { url, text } = fn();
+            const { path, text } = fn();
 
             return (
               <li key={Math.random().toString()}>
-                <Link to={url} style={{ textDecoration: "none", flex: 3 }}>
+                <Link to={path} style={{ textDecoration: "none", flex: 3 }}>
                   {text}{" "}
                 </Link>
               </li>
@@ -22,9 +22,9 @@ export default function Navbar() {
 
         <Switch>
           {Object.values(Routes).map((fn) => {
-            const { url, component } = fn();
+            const { path, component } = fn();
 
-            return <Route exact path={url} component={component}  key={Math.random().toString()}/>;
+            return <Route exact path={path} component={component}  key={Math.random().toString()}/>;
           })}
         </Switch>
       </nav>

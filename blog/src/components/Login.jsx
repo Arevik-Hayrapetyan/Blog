@@ -10,6 +10,8 @@ import { withStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import { setItems, getItems } from "..//helpers/localStorage";
 import { isValidName, isValidPassword } from "../helpers/validation";
+import { Redirect } from 'react-router-dom';
+import { Routes } from "../constants/routes";
 
 const useStyles = (theme) => ({
   paper: {
@@ -39,6 +41,7 @@ class Login extends React.Component {
       password: "",
       isValidName: false,
       isValidPassword: false,
+      isValidLogin: false,
       nameError: "",
       passwordError: "",
       errorMessage: "",
@@ -47,9 +50,11 @@ class Login extends React.Component {
   }
 
   handleName = (event) => {
+    console.log("arev")
     setItems("name", event.target.value);
     this.setState({ name: event.target.value });
     const isValid = isValidName(this.state.name);
+  
     if (isValid) {
       this.setState({ isValidName: true });
       this.setState({ nameError: "" });
@@ -57,6 +62,7 @@ class Login extends React.Component {
       this.setState({ isValidName: false });
       this.setState({ nameError: "Wrong name" });
     }
+    
   };
 
   handlePassword = (event) => {
@@ -74,28 +80,41 @@ class Login extends React.Component {
 
   handleLogin = () => {
     setItems("namePasswords", this.state.namePasswords);
+    const isValidName = this.state.isValidName
+    const isValidPassword = this.state.isValidPassword
 
-    if (isValidName && isValidPassword) {
+    if (isValidName&&isValidPassword) {
+      this.setState({isValidLogin:true})
       this.setState({ errorMessage: "Congrats you are Login successfully" });
     } else {
       this.setState({ errorMessage: "Please try again" });
     }
 
     this.setState((prevState) => {
+
       return {
         namePasswords: [
           ...prevState.namePasswords,
           {
+           
             name: this.state.name,
             password: this.state.password,
             id: Math.random(),
           },
         ],
+        
       };
     });
+  
+
+ 
   };
 
   render() {
+    if (this.state.isValidLogin) {
+      return <Redirect to={Routes.create_post().path} />;
+    }
+   
     const { classes } = this.props;
     return (
       <Container component="main" maxWidth="xs">
