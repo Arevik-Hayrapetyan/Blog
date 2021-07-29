@@ -48,8 +48,7 @@ class CreatePost extends React.Component {
       title: "",
       content: "",
       isAdd: false,
-      namePasswords: getItems("namePasswords"),
-      titleContents: getItems() === null ? [] : getItems(),
+      titleContents: getItems("titleContents") === null ? [] : getItems("titleContents"),
     };
   }
 
@@ -63,7 +62,6 @@ class CreatePost extends React.Component {
   };
 
   handleAdd = (event) => {
-    setItems("titleContents", this.state.titleContents);
     this.setState((prevState) => {
       return {
         titleContents: [
@@ -71,15 +69,20 @@ class CreatePost extends React.Component {
           {
             title: this.state.title,
             content: this.state.content,
-            id: this.state.namePasswords.id,
-            name: this.state.namePasswords.name,
-            postDate: postDate(),
+            id: Math.random(),
+            name: getItems("name"),
+            postDate: postDate,
           },
         ],
       };
     });
     this.setState({isAdd:true})
   };
+
+  componentDidUpdate(){
+    setItems("titleContents", this.state.titleContents);
+
+  }
 
   render() {
     if (this.state.isAdd) {

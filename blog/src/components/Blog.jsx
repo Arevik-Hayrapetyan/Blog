@@ -30,45 +30,47 @@ class Blog extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      titleContents: getItems("titleContents"),
+      titleContents:
+        getItems("titleContents") === null ? [] : getItems("titleContents"),
     };
   }
   render() {
-    console.log("blog")
-    console.log(this.state.titleContents)
     const { classes } = this.props;
 
     return (
       <Card className={classes.root} variant="outlined">
         <CardContent>
           <h1>Posts:</h1>
-          {this.state.titleContents.title }
-          
-            {this.state.titleContents.map((item) => (
-              <div className="" key={item.id}>
-                <Typography className={classes.pos} color="black">
-                  <AccountCircleIcon fontSize="large" />
-                  {item.postDate} by {item.name.toUpperCase()}
-                </Typography>
-                <Typography className={classes.pos} color="textSecondary">
-                  Title
-                  <br />
-                  {item.title}
-                </Typography>
-                <Typography className={classes.pos} color="textSecondary">
-                  Content
-                  <br />
-                  {item.content}
-                </Typography>
-                <CardActions>
-                  <Button size="small" color="secondary">
-                    Learn More
-                  </Button>
-                </CardActions>
-              </div>
-            ))}
-            <br />
-          
+          {this.state.titleContents.map((item) => (
+            <div className="" key={item.id}>
+              <Typography className={classes.pos} color="black">
+                <AccountCircleIcon fontSize="large" />
+                {item.postDate} by {item.name.toUpperCase()}
+              </Typography>
+              <Typography className={classes.pos} color="textSecondary">
+                Title
+                <br />
+                {item.title}
+              </Typography>
+              <Typography className={classes.pos} color="textSecondary">
+                Content
+                <br />
+                {item.content}
+              </Typography>
+              <CardActions>
+                <Button
+                  size="small"
+                  color="secondary"
+                  onClick={() => {
+                    this.props.gago(item);
+                  }}
+                >
+                  Learn More
+                </Button>
+              </CardActions>
+            </div>
+          ))}
+          <br />
         </CardContent>
         <br />
       </Card>
