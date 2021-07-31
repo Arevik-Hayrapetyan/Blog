@@ -45,6 +45,7 @@ class CreatePost extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      postId: Math.random(),
       title: "",
       content: "",
       isAdd: false,
