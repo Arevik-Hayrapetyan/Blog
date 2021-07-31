@@ -4,8 +4,8 @@ import TextField from "@material-ui/core/TextField";
 import { withStyles } from "@material-ui/core/styles";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
 import { setItems, getItems } from "..//helpers/localStorage";
-import postDate from "../helpers/data";
-import { Redirect } from 'react-router-dom';
+import { date, time } from "../helpers/data";
+import { Redirect } from "react-router-dom";
 import { Routes } from "../constants/routes";
 
 const useStyles = (theme) => ({
@@ -48,7 +48,8 @@ class CreatePost extends React.Component {
       title: "",
       content: "",
       isAdd: false,
-      titleContents: getItems("titleContents") === null ? [] : getItems("titleContents"),
+      titleContents:
+        getItems("titleContents") === null ? [] : getItems("titleContents"),
     };
   }
 
@@ -71,17 +72,17 @@ class CreatePost extends React.Component {
             content: this.state.content,
             id: Math.random(),
             name: getItems("name"),
-            postDate: postDate,
+            date: date,
+            time: time,
           },
         ],
       };
     });
-    this.setState({isAdd:true})
+    this.setState({ isAdd: true });
   };
 
-  componentDidUpdate(){
+  componentDidUpdate() {
     setItems("titleContents", this.state.titleContents);
-
   }
 
   render() {

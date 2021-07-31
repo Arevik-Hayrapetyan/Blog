@@ -1,26 +1,14 @@
-const months = [
-  "Jan",
-  "Feb",
-  "Mar",
-  "Apr",
-  "May",
-  "June",
-  "July",
-  "Aug",
-  "Sept",
-  "Oct",
-  "Nov",
-  "Dec",
-];
-function postDate() {
-  let currentDate = new Date();
-  let date =
-    currentDate.getFullYear() +
-    "-" +
-    (currentDate.getMonth()[months] + 1) +
-    "-" +
-    currentDate.getDate();
-  return date;
-}
+const currentDate = new Date();
+ export const date =
+  currentDate.getFullYear() +
+  "-" +
+  (currentDate.getMonth() + 1) +
+  "-" +
+  currentDate.getDate();
 
-export default postDate;
+
+const today = new Date();
+export const time =
+  today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+
+

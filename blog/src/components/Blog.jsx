@@ -45,7 +45,8 @@ class Blog extends React.Component {
             <div className="" key={item.id}>
               <Typography className={classes.pos} color="black">
                 <AccountCircleIcon fontSize="large" />
-                {item.postDate} by {item.name.toUpperCase()}
+                <div>{item.date} {item.time}</div>
+                 by {item.name.toUpperCase()}
               </Typography>
               <Typography className={classes.pos} color="textSecondary">
                 Title
@@ -61,9 +62,9 @@ class Blog extends React.Component {
                 <Button
                   size="small"
                   color="secondary"
-                  onClick={() => {
-                    this.props.gago(item);
-                  }}
+                  // onClick={() => {
+                  //   this.props.gago(item);
+                  // }}
                 >
                   Learn More
                 </Button>
