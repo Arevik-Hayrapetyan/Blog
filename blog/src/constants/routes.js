@@ -8,8 +8,11 @@ import { loginButton } from "./bottomButton";
 
 export const Routes = {
   blog: () => ({ path: "/", text: homeButton, component: Blog }),
-  create_post: () => ({ path: "/post", text: postButton, component: CreatePost }),
+  create_post: () => ({
+    path: "/post",
+    text: postButton,
+    component: CreatePost,
+  }),
   login: () => ({ path: "/login", text: loginButton, component: Login }),
   error: () => ({ path: "*", text: "", component: ErrorPage }),
 };
-

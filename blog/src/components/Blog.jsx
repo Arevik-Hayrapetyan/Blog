@@ -7,6 +7,8 @@ import CardContent from "@material-ui/core/CardContent";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
+import { Redirect } from "react-router-dom";
+import { Routes } from "../constants/routes";
 
 const useStyles = (theme) => ({
   root: {
@@ -62,9 +64,10 @@ class Blog extends React.Component {
                 <Button
                   size="small"
                   color="secondary"
-                  // onClick={() => {
-                  //   this.props.gago(item);
-                  // }}
+                  onClick={() => {
+                    
+                  return   <Redirect to={Routes.edit_page().path} />;
+                   }}
                 >
                   Learn More
                 </Button>
