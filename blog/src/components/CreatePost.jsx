@@ -1,11 +1,11 @@
 import React from "react";
+import { Redirect } from "react-router-dom";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import { withStyles } from "@material-ui/core/styles";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
 import { setItems, getItems } from "..//helpers/localStorage";
-import { date, time } from "../helpers/data";
-import { Redirect } from "react-router-dom";
+import { date, time } from "../data/data";
 import { Routes } from "../constants/routes";
 
 const useStyles = (theme) => ({
@@ -19,13 +19,16 @@ const useStyles = (theme) => ({
     width: "50%",
     backgroundColor: "#9da3b51a",
   },
+
   title: {
     width: "300%",
     margin: theme.spacing(3, 0, 2),
   },
+
   titleWidth: {
     width: "25%",
   },
+
   content: {
     width: "300%",
     margin: theme.spacing(3, 0, 2),
@@ -58,6 +61,7 @@ class CreatePost extends React.Component {
     setItems("title", event.target.value);
     this.setState({ title: event.target.value });
   };
+
   handleContent = (event) => {
     setItems("content", event.target.value);
     this.setState({ content: event.target.value });
@@ -90,7 +94,9 @@ class CreatePost extends React.Component {
     if (this.state.isAdd) {
       return <Redirect to={Routes.blog().path} />;
     }
+
     const { classes } = this.props;
+
     return (
       <form className={classes.wrapper}>
         <h1>Tell us your story...</h1>
@@ -104,6 +110,7 @@ class CreatePost extends React.Component {
             autoFocus
           />
         </div>
+
         <div className={classes.content}>
           <TextField
             onChange={this.handleContent}
@@ -115,6 +122,7 @@ class CreatePost extends React.Component {
             placeholder="Write your post..."
           />
         </div>
+
         <Button>
           <AddCircleIcon
             className={classes.addButtonsize}

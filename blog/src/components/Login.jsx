@@ -1,4 +1,5 @@
 import React from "react";
+import { Redirect } from "react-router-dom";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -10,7 +11,6 @@ import { withStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import { setItems, getItems } from "..//helpers/localStorage";
 import { isValidName, isValidPassword } from "../helpers/validation";
-import { Redirect } from "react-router-dom";
 import { Routes } from "../constants/routes";
 
 const useStyles = (theme) => ({
@@ -20,14 +20,17 @@ const useStyles = (theme) => ({
     flexDirection: "column",
     alignItems: "center",
   },
+
   avatar: {
     margin: theme.spacing(1),
     backgroundColor: theme.palette.secondary.main,
   },
+
   form: {
     width: "100%",
     marginTop: theme.spacing(1),
   },
+
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
@@ -85,13 +88,9 @@ class Login extends React.Component {
     } else {
       this.setState({ errorMessage: "Please try again" });
     }
-   setItems("name", this.state.name)
-    
+    setItems("name", this.state.name);
   };
 
- 
-
-  
   render() {
     if (this.state.isValidLogin) {
       return <Redirect to={Routes.create_post().path} />;
@@ -120,6 +119,7 @@ class Login extends React.Component {
             autoFocus
           />
           <span style={{ color: "red" }}>{this.state.nameError}</span>
+
           <TextField
             onChange={this.handlePassword}
             variant="outlined"

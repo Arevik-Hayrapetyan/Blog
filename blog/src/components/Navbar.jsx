@@ -24,7 +24,14 @@ export default function Navbar() {
           {Object.values(Routes).map((fn) => {
             const { path, component } = fn();
 
-            return <Route exact path={path} component={component}  key={Math.random().toString()}/>;
+            return (
+              <Route
+                exact
+                path={path}
+                component={component}
+                key={Math.random().toString()}
+              />
+            );
           })}
         </Switch>
       </nav>

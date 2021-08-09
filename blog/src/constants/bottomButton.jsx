@@ -9,12 +9,14 @@ export const homeButton = (
     Blog
   </Button>
 );
- export const postButton = (
+
+export const postButton = (
   <Button color="primary" style={{ flex: 1 }}>
     <PostAddIcon color="primary" value="Home" fontSize="large" />
     Create Post
   </Button>
 );
+
 export const loginButton = (
   <Button color="primary" style={{ flex: 1 }}>
     <LockOpenIcon color="primary" value="Login" fontSize="large" />
